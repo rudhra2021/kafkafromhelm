@@ -1,0 +1,22 @@
+# apiVersion and kind of Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# Adds namespace to all resources.
+namespace: kafkatest
+
+# Labels to add to all resources and selectors.
+#commonLabels:
+#  someName: someValue
+#  owner: alice
+#  app: bingo
+
+resources:
+- configmap.yaml
+- service-zookeeper.yaml
+- service-zookeeper-headless.yaml
+- statefulset-kafka-zookeeper.yaml
+- service-kafka.yaml
+- service-kafka-headless.yaml
+- statefulset-kafka.yaml
+- testpod.yaml
