@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: my-kafka
+    meta.helm.sh/release-namespace: kafkatest
+  creationTimestamp: null
+  labels:
+    app.kubernetes.io/component: kafka-broker
+    app.kubernetes.io/instance: my-kafka
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: kafka
+    helm.sh/chart: kafka-0.21.2
+  name: my-kafka
+  selfLink: /api/v1/namespaces/kafkatest/services/my-kafka
+spec:
+  ports:
+  - name: broker
+    port: 9092
+    protocol: TCP
+    targetPort: kafka
+  selector:
+    app.kubernetes.io/component: kafka-broker
+    app.kubernetes.io/instance: my-kafka
+    app.kubernetes.io/name: kafka
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

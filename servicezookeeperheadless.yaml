@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: my-kafka
+    meta.helm.sh/release-namespace: kafkatest
+  creationTimestamp: null
+  labels:
+    app: zookeeper
+    app.kubernetes.io/managed-by: Helm
+    chart: zookeeper-2.1.0
+    heritage: Helm
+    release: my-kafka
+  name: my-kafka-zookeeper-headless
+  selfLink: /api/v1/namespaces/kafkatest/services/my-kafka-zookeeper-headless
+spec:
+  clusterIP: None
+  ports:
+  - name: client
+    port: 2181
+    protocol: TCP
+    targetPort: client
+  - name: election
+    port: 3888
+    protocol: TCP
+    targetPort: election
+  - name: server
+    port: 2888
+    protocol: TCP
+    targetPort: server
+  selector:
+    app: zookeeper
+    release: my-kafka
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
